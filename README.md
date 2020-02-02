@@ -4,20 +4,42 @@
 
 Dans le cadre du cours de Unix, nous avons choisi de réaliser un article comparatif de X11 et Wayland. Tout deux sont des protocoles qui spécifient la communication entre le serveur d'affichage et le client/poste de travail.
 
-Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiques** (GUI) facilitant grandement l'intéraction Homme-Machine, pour les systèmes Unix.
+Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiques** (GUI: Graphical User Interface) facilitant grandement l'intéraction Homme-Machine, pour les systèmes Unix.
 
+De nombreux systèmes d'affichage ont précédé les protocoles présentés ici. Des GUI étaient déjà présent sur des machines tels que: [Alto](https://www.wikiwand.com/en/Xerox_Alto), [Star](https://www.wikiwand.com/en/Xerox_Star) ou [Macintosh](https://www.wikiwand.com/en/Macintosh).
+
+
+Macintosh             |  Xerox
+:-------------------------:|:-------------------------:
+![](./assets/macintosh.jpeg)  |  ![](./assets/xerox.png)
+
+---
+
+Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis nous allons voir en quoi **Wayland** est une alternative intéressante. 
 
 ## X Window system
 
 ### Introduction
 
-### Objectifs
+**X ou X Window System**, est un protocole ou framework, mettant en place une architecture particulière permettant d'implémenter des GUI sur les systèmes Unix. X11 est la onzième version de ce protocole.
+
+#### Terminologies
+
+- **X ou X Window System** : désigne le protocole ou framework de base qui permet de mettre en place une GUI.
+- **X11** : 11ème version de X.
+- **Xorg** : implémentation du serveur d'affichage (X server) utilisé dans le framework X.
+- **Xlib & Xcb** : librairies côté client écrites en C permettant d'intéragir facilement avec le X server.
+
+### Origine et objectifs
+
 
 ### Fonctionnement
 
-### Programmation
+### X server
 
-### Limite
+### Libraries
+
+### Limites
 
 ## Wayland
 
