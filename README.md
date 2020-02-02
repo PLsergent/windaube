@@ -1,6 +1,11 @@
-# Xorg vs Wayland
+# X11 vs Wayland
 
 ## Introduction
+
+Dans le cadre du cours de Unix, nous avons choisi de réaliser un article comparatif de X11 et Wayland. Tout deux sont des protocoles qui spécifient la communication entre le serveur d'affichage et le client/poste de travail.
+
+Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiques** (GUI) facilitant grandement l'intéraction Homme-Machine, pour les systèmes Unix.
+
 
 ## X Window system
 
