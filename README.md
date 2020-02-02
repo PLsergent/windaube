@@ -1,5 +1,9 @@
 # X11 vs Wayland
 
+|          X11           |          Wayland          |
+| :--------------------------: | :---------------------: |
+| ![x11](./assets/X11.png) | ![wayland](./assets/wayland.png) |
+
 ## Introduction
 
 Dans le cadre du cours de Unix, nous avons choisi de réaliser un article comparatif de X11 et Wayland. Tout deux sont des protocoles qui spécifient la communication entre le serveur d'affichage et le client/poste de travail.
@@ -10,7 +14,7 @@ De nombreux systèmes d'affichage ont précédé les protocoles présentés ici.
 
 |          Macintosh           |          Xerox          |
 | :--------------------------: | :---------------------: |
-| ![](./assets/macintosh.jpeg) | ![](./assets/xerox.png) |
+| ![macintosh](./assets/macintosh.jpeg) | ![xerox](./assets/xerox.png) |
 
 ---
 
@@ -37,7 +41,8 @@ Pour répondre à ce problème d'incompatibilité, les personnes en charges du p
 
 <img src="assets\X-Window-System.png"
     alt="X window system" 
-    width="600px" />
+    width="80%"
+    style="margin-left: 10%" />
 
 L'objectifs était donc de créer :
 
@@ -58,7 +63,9 @@ Voici donc les 4 parties d'une architecture X :
 - **Compositor**
 
 <img src="assets\x-architecture.png"
-    alt="x-schema" />
+    alt="x-schema" 
+    width="70%"
+    style="margin-left: 15%"/>
 
 #### Description d'un workflow classique
 
