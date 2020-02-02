@@ -38,9 +38,18 @@ X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laborator
 
 Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. *Bob Scheifler* du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
 
-Les objectifs étaient donc de créer :
-- Une interface graphique comportant un système de fenêtres
-- Fonctionnelle sur les différents systèmes et indépendant du hardware
+<div style="text-align: center">
+    <img src="assets\X-Window-System.png"
+        alt="wayland-schema" 
+        width="600px" />
+</div>
+
+L'objectifs était donc de créer :
+- Une **interface graphique** comportant un système de fenêtres
+- fonctionnelle sur les différents systèmes et **indépendant du hardware**
+- permettant une **intéraction avec les périphériques** (souris, clavier, écran tactile,...)
+
+![Example interface graphique moderne](./assets/KDE_Plasma_5.16.png)
 
 ### Fonctionnement
 
@@ -70,9 +79,10 @@ Le fonctionnement de _Wayland_ se fait entre 3 parties :
 - **[Le compositeur de Wayland]**
 - **[Les clients (programmes, applications)]**
 
-<img src="assets\wayland-schema.png"
-     alt="wayland-schema"
-     style="margin-left: 25%;" />
+<div style="text-align: center">
+    <img src="assets\wayland-schema.png"
+        alt="wayland-schema" />
+</div>
 
 Le noyau va obtenir des évènements provenant soit du _hardware_ soit des _inputs_ (clavier,etc...) et l'envoyer au compositeur. C'est le même fonctionnement qu'avec X Window, çela nous évite de redéfinir les pilotes d'entrée dans le noyau.
 
