@@ -6,7 +6,6 @@ Dans le cadre du cours de Unix, nous avons choisi de réaliser un article compar
 
 Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiques** (GUI) facilitant grandement l'intéraction Homme-Machine, pour les systèmes Unix.
 
-
 ## X Window system
 
 ### Introduction
@@ -55,6 +54,18 @@ Le compositeur recueille les **demandes de dommages _(damage requests)_** de ses
 Avec le rendu direct, le client et le serveur partagent un tampon de mémoire vidéo. Le client se connecte à une bibliothèque de rendu comme **OpenGL** qui sait comment programmer le matériel et effectue le rendu directement dans la mémoire tampon. Le compositeur peut à son tour prendre la mémoire tampon et l'utiliser comme texture lorsqu'il compose le bureau. Après la configuration initiale, le client doit seulement indiquer au compositeur quel tampon utiliser et quand et où il a rendu le nouveau contenu dans celui-ci.
 
 ### Programmation
+
+Il est possible de développer des compositeurs personalisés avec des lib tels que **Qt Wayland Compositor**.
+
+Qt Wayland Compositor est un module qui fournit des **API QML et C++** pratiques et puissantes pour développer des compositeurs personnalisés basés sur le protocole Wayland. Rappelons que le **compositeur**, affiche le contenu des applications clientes qui supportent le protocole _Wayland_.
+
+La philosophie de Wayland est de garder le protocole de base simple et minimal. Les développeurs peuvent ensuite développer ce protocole de base avec des extensions spécifiques à chaque cas d'utilisation. **Qt Wayland Compositor** prend en charge de nombreuses extensions courantes par défaut, et dispose également d'API permettant de créer de nouvelles extensions personnalisées.
+
+Schéma plus détaillé pour mieux comprendre comment fonctionne le tout :
+
+<img src="assets\wayland-schema-full.png"
+     alt="wayland-schema"
+     style="margin-left: 25%; width: 50%;" />
 
 **Environnement de bureau supporté**
 
