@@ -17,7 +17,7 @@ Macintosh             |  Xerox
 
 Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis nous allons voir en quoi **Wayland** est une alternative intéressante. 
 
-## X Window system
+## X Window System
 
 ### Introduction
 
@@ -32,6 +32,13 @@ Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis
 
 ### Origine et objectifs
 
+X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science) en 1984. Durant cette période le [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science), la [DEC](https://www.wikiwand.com/en/Digital_Equipment_Corporation) et [IBM](https://www.wikiwand.com/en/IBM) développait le **Projet Athena** à des fins éducatives. Cette plateforme permettrait aux étudiants d'avoir un accès partagé aux ressources informatiques. Elle avait donc besoin d'avoir une interface graphique indépendante pour fonctionner sur les différents systèmes (IBM vs DEC), tout en comportant un système de *fenêtres*.
+
+Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. *Bob Scheifler* du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
+
+Les objectifs étaient donc de créer :
+- Une interface graphique comportant un système de fenêtres
+- Fonctionnelle sur les différents systèmes et indépendant du hardware
 
 ### Fonctionnement
 
