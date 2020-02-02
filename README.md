@@ -37,7 +37,7 @@ X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laborator
 Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. *Bob Scheifler* du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
 
 <img src="assets\X-Window-System.png"
-    alt="wayland-schema" 
+    alt="X window system" 
     width="600px" />
 
 L'objectifs était donc de créer :
@@ -48,6 +48,26 @@ L'objectifs était donc de créer :
 ![Example interface graphique moderne](./assets/KDE_Plasma_5.16.png)
 
 ### Fonctionnement
+
+X utilise un model *client-serveur*. Le serveur (X Server) communique avec différents clients (X client), qui représentent les applications qui sont lancés sur la machine. Le serveur reçoit des requêtes pour ensuite réaliser un rendu graphique et peut aussi recevoir des *inputs* (evdev) de l'utilisateur, venant des périphériques, pour les renvoyer vers les clients.
+
+Voici donc les 4 parties d'une architecture X :
+- **KMS** (Kernel Mode Setting: responsable de l'affichage), **evdev** (interface/driver des évènements sur Linux), **Kernel** (noyau Linux)
+- **X server**
+- **X client**
+- **Compositor**
+
+<img src="assets\x-architecture.png"
+    alt="x-schema" />
+
+#### Description d'un workflow classique
+
+1. Le Kernel reçoit un *input* et l'envoie au X server en utilisant le driver *evdev* responsable des évènements.
+2. Le X server détermine quelle fenêtre est impacté par l'évènement et l'envoie au X client concerné.
+3. Le X client traite l'évènement et choisi quelle(s) action(s) doivent être effectuées. Par exemple une checkbox a été cliqué et on doit donc changer l'affichage de cette dernière. Suite à cela le client envoie une requête d'affichage au serveur.
+4. Quand le X server reçoit cette requête, il l'a redirige vers le driver spécifique afin de réaliser les changements voulu en s'appuyant sur le hardware. Le serveur va aussi calculer la zone de délimitation du rendu et envoie ces informations au *compositor*.
+5. Les informations reçu par le *compositor* lui indique qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le composeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
+6. Le X server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
 
 ### X server
 
@@ -71,13 +91,13 @@ L'objectif principal de Wayland est de remplacer le système X Window par un sys
 
 Le fonctionnement de _Wayland_ se fait entre 3 parties :
 
-- **[KMS, evdev, Kernel]**
-- **[Le compositeur de Wayland]**
-- **[Les clients (programmes, applications)]**
+- **KMS, evdev, Kernel**
+- **Le compositeur de Wayland**
+- **Les clients (programmes, applications)**
 
 <img src="assets\wayland-schema.png"
     alt="wayland-schema" 
-    style="margin-left: 25%"/>
+    style="margin-left: 28%" />
 
 Le noyau va obtenir des évènements provenant soit du _hardware_ soit des _inputs_ (clavier,etc...) et l'envoyer au compositeur. C'est le même fonctionnement qu'avec X Window, çela nous évite de redéfinir les pilotes d'entrée dans le noyau.
 
