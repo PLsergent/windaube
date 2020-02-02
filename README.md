@@ -8,14 +8,13 @@ Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiq
 
 De nombreux systèmes d'affichage ont précédé les protocoles présentés ici. Des GUI étaient déjà présent sur des machines tels que: [Alto](https://www.wikiwand.com/en/Xerox_Alto), [Star](https://www.wikiwand.com/en/Xerox_Star) ou [Macintosh](https://www.wikiwand.com/en/Macintosh).
 
-
-Macintosh             |  Xerox
-:-------------------------:|:-------------------------:
-![](./assets/macintosh.jpeg)  |  ![](./assets/xerox.png)
+|          Macintosh           |          Xerox          |
+| :--------------------------: | :---------------------: |
+| ![](./assets/macintosh.jpeg) | ![](./assets/xerox.png) |
 
 ---
 
-Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis nous allons voir en quoi **Wayland** est une alternative intéressante. 
+Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis nous allons voir en quoi **Wayland** est une alternative intéressante.
 
 ## X Window System
 
@@ -32,15 +31,16 @@ Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis
 
 ### Origine et objectifs
 
-X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science) en 1984. Durant cette période le [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science), la [DEC](https://www.wikiwand.com/en/Digital_Equipment_Corporation) et [IBM](https://www.wikiwand.com/en/IBM) développait le **Projet Athena** à des fins éducatives. Cette plateforme permettrait aux étudiants d'avoir un accès partagé aux ressources informatiques. Elle avait donc besoin d'avoir une interface graphique indépendante pour fonctionner sur les différents systèmes (IBM vs DEC), tout en comportant un système de *fenêtres*.
+X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science) en 1984. Durant cette période le [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science), la [DEC](https://www.wikiwand.com/en/Digital_Equipment_Corporation) et [IBM](https://www.wikiwand.com/en/IBM) développait le **Projet Athena** à des fins éducatives. Cette plateforme permettrait aux étudiants d'avoir un accès partagé aux ressources informatiques. Elle avait donc besoin d'avoir une interface graphique indépendante pour fonctionner sur les différents systèmes (IBM vs DEC), tout en comportant un système de _fenêtres_.
 
-Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. *Bob Scheifler* du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
+Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. _Bob Scheifler_ du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
 
 <img src="assets\X-Window-System.png"
     alt="X window system" 
     width="600px" />
 
 L'objectifs était donc de créer :
+
 - Une **interface graphique** comportant un système de fenêtres
 - fonctionnelle sur les différents systèmes et **indépendant du hardware**
 - permettant une **intéraction avec les périphériques** (souris, clavier, écran tactile,...)
@@ -118,11 +118,11 @@ Qt Wayland Compositor est un module qui fournit des **API QML et C++** pratiques
 
 La philosophie de Wayland est de garder le protocole de base simple et minimal. Les développeurs peuvent ensuite développer ce protocole de base avec des extensions spécifiques à chaque cas d'utilisation. **Qt Wayland Compositor** prend en charge de nombreuses extensions courantes par défaut, et dispose également d'API permettant de créer de nouvelles extensions personnalisées.
 
-Schéma plus détaillé pour mieux comprendre comment fonctionne le tout :
+|         Schéma plus détaillé          |
+| :-----------------------------------: |
+| ![](./assets/wayland-schema-full.png) |
 
-<img src="assets\wayland-schema-full.png"
-     alt="wayland-schema"
-     style="margin-left: 25%; width: 50%;" />
+---
 
 **Environnement de bureau supporté**
 
