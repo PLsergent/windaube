@@ -69,9 +69,30 @@ Voici donc les 4 parties d'une architecture X :
 5. Les informations reçu par le *compositor* lui indique qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le composeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
 6. Le X server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
 
-### X server
+### X server - Xorg
 
-### Libraries
+X server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéraction entre l'utilisateur, le client et le composeur.
+
+L'implémentation actuelle de ce serveur, est nommée **Xorg**.
+Elle a été écrite en C, avec une licence FOSS (Free and Open Source Software) et est maintenue par la [Xorg Foundation](https://www.wikiwand.com/en/X.Org_Foundation).
+
+Il existe des librairies C, dîtes *client*, qui permettent d'intéragir plus facilement avec le server Xorg tel que **Xlib** ou **Xcb**. À savoir qu'il existe aussi de nombreux *bindings* permettant d'utiliser d'autres languages comme Python.
+
+L'implémentation principale (hors extension) se divise en deux parties.
+
+#### Device Independent X (DIX)
+
+Cette partie est indépendante car elle ne va pas intéragir avec le hardware. Elle va intéragir avec les clients et implémenter les rendus des applications. Elle est la partie la plus importante de Xorg.
+
+#### Device Dependent X (DDX)
+
+Cette partie est dépendante car elle intéragie avec le hardware. Le hardware désigne aussi bien les cartes graphiques, que les périphériques (souris, clavier, etc...). Chaque partie du hardware possède son driver, et est implémenté sous forme de module.
+
+---
+
+Un driver qui nous intéresse est le ***2D graphics driver***.
+
+Pour des raisons historiques Xorg possède toujours un driver pour les rendus graphique en 2D. En effet auparavant, c'est Xorg qui s'en occupait. Cette fonctionnalité a été déplacé dans le DRM, avec la nouvelle approche : le KMS (cf étape 6 du workflow), présent dans le noyau Linux.
 
 ### Limites
 
