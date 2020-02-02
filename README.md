@@ -78,6 +78,18 @@ Avec le rendu direct, le client et le serveur partagent un tampon de mémoire vi
 
 ### Programmation
 
+Il est possible de développer des compositeurs personalisés avec des lib tels que **Qt Wayland Compositor**.
+
+Qt Wayland Compositor est un module qui fournit des **API QML et C++** pratiques et puissantes pour développer des compositeurs personnalisés basés sur le protocole Wayland. Rappelons que le **compositeur**, affiche le contenu des applications clientes qui supportent le protocole _Wayland_.
+
+La philosophie de Wayland est de garder le protocole de base simple et minimal. Les développeurs peuvent ensuite développer ce protocole de base avec des extensions spécifiques à chaque cas d'utilisation. **Qt Wayland Compositor** prend en charge de nombreuses extensions courantes par défaut, et dispose également d'API permettant de créer de nouvelles extensions personnalisées.
+
+Schéma plus détaillé pour mieux comprendre comment fonctionne le tout :
+
+<img src="assets\wayland-schema-full.png"
+     alt="wayland-schema"
+     style="margin-left: 25%; width: 50%;" />
+
 **Environnement de bureau supporté**
 
 ```
