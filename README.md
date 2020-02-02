@@ -1,5 +1,3 @@
-<div style="text-align: justify">
-
 # X11 vs Wayland
 
 ## Introduction
@@ -139,5 +137,3 @@ Wayland a également le potentiel d'être plus rapide, en réduisant la quantit�
 - https://www.wikiwand.com/en/X.Org_Server
 - https://www.wikiwand.com/en/X_Window_System
 - https://wayland.freedesktop.org/
-
-</div>
