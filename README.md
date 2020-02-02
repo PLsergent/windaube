@@ -38,13 +38,16 @@ Le noyau va obtenir des évènements provenant soit du _hardware_ soit des _inpu
 
 Le **compositeur** examine son **environnement** pour déterminer quelle fenêtre doit recevoir l'événement. L'environnement correspond à ce qui est à l'écran et le compositeur comprends les transformations qu'il peut appliquer aux éléments de l'environnement. Ainsi, le compositeur peut choisir la bonne fenêtre et transformer les coordonnées d'écran en coordonnées locales de fenêtre, en appliquant les transformations inverses. Les types de transformation qui peuvent être appliqués à une fenêtre sont uniquement limités à ce que le compositeur peut faire, tant qu'il peut calculer la transformation inverse pour les événements d'entrée.
 
-Comme dans le cas X, lorsque le client reçoit l'événement, il met à jour l'interface utilisateur. Mais dans le cas de Wayland, le rendu se produit dans le client, et le client envoie simplement une demande au compositeur pour indiquer la région qui a été mise à jour.
+Comme dans le cas X, lorsque le client reçoit l'événement, il met à jour l'interface utilisateur. Mais dans le cas de Wayland, le rendu se produit dans le client (**c.f : Rendu direct**), et le client envoie simplement une demande au compositeur pour indiquer la région qui a été mise à jour.
 Le compositeur recueille les **demandes de dommages _(damage requests)_** de ses clients et recompose ensuite l'écran. Le compositeur peut alors directement émettre un **ioctl _(input-output control)_** pour planifier un saut de page avec **KMS**.
+
+### Rendu direct
+
+Avec le rendu direct, le client et le serveur partagent un tampon de mémoire vidéo. Le client se connecte à une bibliothèque de rendu comme **OpenGL** qui sait comment programmer le matériel et effectue le rendu directement dans la mémoire tampon. Le compositeur peut à son tour prendre la mémoire tampon et l'utiliser comme texture lorsqu'il compose le bureau. Après la configuration initiale, le client doit seulement indiquer au compositeur quel tampon utiliser et quand et où il a rendu le nouveau contenu dans celui-ci.
 
 ### Programmation
 
-####Supported environments
-**Desktop environments:**
+**Environnement de bureau supporté**
 
 ```
 - GNOME 3.20+ (if specifically selected; X is used by default in Debian)
@@ -53,8 +56,7 @@ Le compositeur recueille les **demandes de dommages _(damage requests)_** de ses
 - Hawaii
 ```
 
-####Unsupported environments
-**Desktop environments:**
+**Environnement de bureau non supporté**
 
 ```
 - Cinnamon
