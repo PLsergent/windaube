@@ -9,8 +9,8 @@
     + [Fonctionnement](#fonctionnement)
       - [Description d'un workflow classique](#description-d-un-workflow-classique)
     + [X Server - Xorg](#x-server---xorg)
-      - [Device Independent X (DIX)](#device-independent-x--dix-)
-      - [Device Dependent X (DDX)](#device-dependent-x--ddx-)
+      - [Device Independent X - DIX](#device-independent-x---dix)
+      - [Device Dependent X - DDX](#device-dependent-x---ddx)
     + [Limites](#limites)
       - [Interface utilisateur](#interface-utilisateur)
       - [Client-serveur](#client-serveur)
@@ -24,6 +24,7 @@
   * [Sources](#sources)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 ---
 
@@ -122,11 +123,11 @@ Il existe des librairies C, dîtes *client*, qui permettent d'intéragir plus fa
 
 L'implémentation principale (hors extension) se divise en deux parties.
 
-#### Device Independent X (DIX)
+#### Device Independent X - DIX
 
 Cette partie est indépendante car elle ne va pas intéragir avec le hardware. Elle va intéragir avec les clients et implémenter les rendus des applications. Elle est la partie la plus importante de Xorg.
 
-#### Device Dependent X (DDX)
+#### Device Dependent X - DDX
 
 Cette partie est dépendante car elle intéragie avec le hardware. Le hardware désigne aussi bien les cartes graphiques, que les périphériques (souris, clavier, etc...). Chaque partie du hardware possède son driver, et est implémenté sous forme de module.
 
