@@ -196,9 +196,11 @@ La philosophie de Wayland est de garder le protocole de base simple et minimal. 
 
 ## Comparaison
 
+On peut donc voir que Wayland a pour but de remplacer X en améliorant ses points faibles. Ce nouveau protocol réduit la complexité présente dans X en supprimant des étapes lors du traitement d'un *input*. En effet le *compositor* et le serveur ne font qu'un : **Weston**, cela d'améliorer les performances. 
+
 Wayland permet une meilleure isolation entre les processus : une fenêtre ne peut pas accéder aux ressources d'une autre fenêtre, ni y injecter des frappes.
 
-Wayland a également le potentiel d'être plus rapide, en réduisant la quantité de code entre les processus et le matériel, en déléguant beaucoup de choses aux processus eux-mêmes.
+Wayland a également le potentiel d'être plus rapide, en réduisant la quantité de code entre les processus et le matériel, en déléguant beaucoup de choses aux processus eux-mêmes (utilisation des librairies du noyaux Linux).
 
 ## Sources
 
