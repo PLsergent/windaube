@@ -39,7 +39,7 @@ Dans le cadre du cours de Unix, nous avons choisi de réaliser un article compar
 
 Autrement dit, ces protocoles ont permis d'implémenter des **interfaces graphiques** (GUI: Graphical User Interface) facilitant grandement l'intéraction Homme-Machine, pour les systèmes Unix.
 
-De nombreux systèmes d'affichage ont précédé les protocoles présentés ici. Des GUI étaient déjà présent sur des machines tels que: [Alto](https://www.wikiwand.com/en/Xerox_Alto), [Star](https://www.wikiwand.com/en/Xerox_Star) ou [Macintosh](https://www.wikiwand.com/en/Macintosh).
+De nombreux systèmes d'affichage ont précédé les protocoles présentés ici. Des GUI étaient déjà présents sur des machines telles que: [Alto](https://www.wikiwand.com/en/Xerox_Alto), [Star](https://www.wikiwand.com/en/Xerox_Star) ou [Macintosh](https://www.wikiwand.com/en/Macintosh).
 
 |          Macintosh           |          Xerox          |
 | :--------------------------: | :---------------------: |
@@ -64,9 +64,9 @@ Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis
 
 ### Origine et objectifs
 
-X est un idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science) en 1984. Durant cette période le [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science), la [DEC](https://www.wikiwand.com/en/Digital_Equipment_Corporation) et [IBM](https://www.wikiwand.com/en/IBM) développait le **Projet Athena** à des fins éducatives. Cette plateforme permettrait aux étudiants d'avoir un accès partagé aux ressources informatiques. Elle avait donc besoin d'avoir une interface graphique indépendante pour fonctionner sur les différents systèmes (IBM vs DEC), tout en comportant un système de _fenêtres_.
+X est une idée qui a émergé au [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science) en 1984. Durant cette période le [MIT](https://www.wikiwand.com/en/MIT_Laboratory_for_Computer_Science), la [DEC](https://www.wikiwand.com/en/Digital_Equipment_Corporation) et [IBM](https://www.wikiwand.com/en/IBM) développait le **Projet Athena** à des fins éducatives. Cette plateforme permettrait aux étudiants d'avoir un accès partagé aux ressources informatiques. Elle avait donc besoin d'avoir une interface graphique indépendante pour fonctionner sur les différents systèmes (IBM vs DEC), tout en comportant un système de _fenêtre_.
 
-Pour répondre à ce problème d'incompatibilité, les personnes en charges du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. _Bob Scheifler_ du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
+Pour répondre à ce problème d'incompatibilité, les personnes en charge du projet ont créé un protocole qui permettait de lancer des applications en locales tout en appelant des ressources externes. De plus, à la même époque un protocole similaire existait déjà : le **W Window System**, qui était synchrone. _Bob Scheifler_ du MIT s'est fortement inspiré de ce protocole, en le rendant asynchrone, X était né.
 
 <img src="assets\X-Window-System.png"
     alt="X window system" 
@@ -99,11 +99,11 @@ Voici donc les 4 parties d'une architecture X :
 #### Description workflow classique
 
 1. Le Kernel reçoit un *input* et l'envoie au X Server en utilisant le driver *evdev* responsable des évènements.
-2. Le X Server détermine quelle fenêtre est impacté par l'évènement et l'envoie au X client concerné.
-3. Le X client traite l'évènement et choisi quelle(s) action(s) doivent être effectuées. Par exemple une checkbox a été cliqué et on doit donc changer l'affichage de cette dernière. Suite à cela le client envoie une requête d'affichage au serveur.
-4. Quand le X Server reçoit cette requête, il l'a redirige vers le driver spécifique afin de réaliser les changements voulu en s'appuyant sur le hardware. Le serveur va aussi calculer la zone de délimitation du rendu et envoie ces informations au *compositor*.
-5. Les informations reçu par le *compositor* lui indique qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le composeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
-6. Le X Server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
+2. Le X Server détermine quelle fenêtre est impactée par l'évènement et l'envoie au X client concerné.
+3. Le X client traite l'évènement et choisi quelle(s) action(s) doit être effectuée. Par exemple une checkbox a été cliqué et on doit donc changer l'affichage de cette dernière. Suite à cela le client envoie une requête d'affichage au serveur.
+4. Quand le X Server reçoit cette requête, il la redirige vers le driver spécifique afin de réaliser les changements voulus en s'appuyant sur le hardware. Le serveur va aussi calculer la zone de délimitation du rendu et envoie ces informations au *compositor*.
+5. Les informations reçu par le *compositor* lui indiquent qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le compositeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
+6. Le X Server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous-module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors le pipeline d'affichage.
 
 ---
 
@@ -115,7 +115,7 @@ Le fonctionnement du protocol reste global en ne faisant aucune spécification s
 
 ### X Server - Xorg
 
-X Server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéraction entre l'utilisateur, le client et le composeur.
+X Server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéractions entre l'utilisateur, le client et le compositeur.
 
 L'implémentation actuelle de ce serveur, est nommée **Xorg**.
 Elle a été écrite en C, avec une licence FOSS (Free and Open Source Software) et est maintenue par la [Xorg Foundation](https://www.wikiwand.com/en/X.Org_Foundation).
@@ -141,7 +141,7 @@ Pour des raisons historiques Xorg possède toujours un driver pour les rendus gr
 ### Limites
 
 X11 et Xorg sont présents et utilisés par défaut sur quasiment toutes les distributions Linux.
-Malgré tout X possèdent plusieurs points faibles voir même des problèmes qui poussent les développeurs à se demander si X est le système de fenêtre optimal.
+Malgré tout X possèdent plusieurs points faibles voire même des problèmes qui poussent les développeurs à se demander si X est le système de fenêtre optimal.
 
 #### Interface utilisateur
 
@@ -155,7 +155,7 @@ Comme expliqué dans la partie **Device Dependent X (DDX)**, avec l'example du d
 
 Le X Server ne fait donc pas grand chose. Il représente une étape supplémentaire, qui permet de faire passer les requêtes aux bons composants. On note que cette étape supplémentaire augmente la compléxité du framework X.
 
-De plus, c'est le *compositor* qui prend les décisions finales quant à l'affichage. On se pose donc la question du véritable intérêt du serveur (tout du moins dans cette organisation), et de l'intérêt de la séparation du serveur et du composeur, qui prend une grande partie des décisions.
+De plus, c'est le *compositor* qui prend les décisions finales quant à l'affichage. On se pose donc la question du véritable intérêt du serveur (tout du moins dans cette organisation), et de l'intérêt de la séparation du serveur et du compositeur, qui prend une grande partie des décisions.
 
 ## Wayland
 
@@ -183,7 +183,7 @@ Le fonctionnement de _Wayland_ se fait entre 3 parties :
 
 Le noyau va obtenir des évènements provenant soit du _hardware_ soit des _inputs_ (clavier,etc...) et l'envoyer au compositeur. C'est le même fonctionnement qu'avec X Window, çela nous évite de redéfinir les pilotes d'entrée dans le noyau.
 
-Le **compositeur** examine son **environnement** pour déterminer quelle fenêtre doit recevoir l'événement. L'environnement correspond à ce qui est à l'écran et le compositeur comprends les transformations qu'il peut appliquer aux éléments de l'environnement. Ainsi, le compositeur peut choisir la bonne fenêtre et transformer les coordonnées d'écran en coordonnées locales de fenêtre, en appliquant les transformations inverses. Les types de transformation qui peuvent être appliqués à une fenêtre sont uniquement limités à ce que le compositeur peut faire, tant qu'il peut calculer la transformation inverse pour les événements d'entrée.
+Le **compositeur** examine son **environnement** pour déterminer quelle fenêtre doit recevoir l'événement. L'environnement correspond à ce qui est à l'écran et le compositeur comprend les transformations qu'il peut appliquer aux éléments de l'environnement. Ainsi, le compositeur peut choisir la bonne fenêtre et transformer les coordonnées d'écran en coordonnées locales de fenêtre, en appliquant les transformations inverses. Les types de transformations qui peuvent être appliqués à une fenêtre sont uniquement limités à ce que le compositeur peut faire, tant qu'il peut calculer la transformation inverse pour les événements d'entrées.
 
 Comme dans le cas X, lorsque le client reçoit l'événement, il met à jour l'interface utilisateur. Mais dans le cas de Wayland, le rendu se produit dans le client (**c.f : Rendu direct**), et le client envoie simplement une demande au compositeur pour indiquer la région qui a été mise à jour.
 Le compositeur recueille les **demandes de dommages _(damage requests)_** de ses clients et recompose ensuite l'écran. Le compositeur peut alors directement émettre un **ioctl _(input-output control)_** pour planifier un saut de page avec **KMS**.
