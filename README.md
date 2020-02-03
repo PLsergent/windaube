@@ -232,8 +232,8 @@ Wayland a également le potentiel d'être plus rapide, en réduisant la quantit�
 
 ## Sources
 
-[](https://www.secjuice.com/wayland-vs-xorg/)
-[](https://www.x.org/wiki/)
-[](https://www.wikiwand.com/en/X.Org_Server)
-[](https://www.wikiwand.com/en/X_Window_System)
-[](https://wayland.freedesktop.org/)
+[wayland-vs-xorg](https://www.secjuice.com/wayland-vs-xorg/)
+[Xorg/wiki](https://www.x.org/wiki/)
+[Xorg server](https://www.wikiwand.com/en/X.Org_Server)
+[X Window System](https://www.wikiwand.com/en/X_Window_System)
+[Wayland](https://wayland.freedesktop.org/)
