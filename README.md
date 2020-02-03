@@ -7,7 +7,7 @@
       - [Terminologies](#terminologies)
     + [Origine et objectifs](#origine-et-objectifs)
     + [Fonctionnement](#fonctionnement)
-      - [Description d'un workflow classique](#description-d-un-workflow-classique)
+      - [Description workflow classique](#description-workflow-classique)
     + [X Server - Xorg](#x-server---xorg)
       - [Device Independent X - DIX](#device-independent-x---dix)
       - [Device Dependent X - DDX](#device-dependent-x---ddx)
@@ -24,6 +24,7 @@
   * [Sources](#sources)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 
 ---
@@ -95,7 +96,7 @@ Voici donc les 4 parties d'une architecture X :
     width="70%"
     style="margin-left: 15%"/>
 
-#### Description d'un workflow classique
+#### Description workflow classique
 
 1. Le Kernel reçoit un *input* et l'envoie au X Server en utilisant le driver *evdev* responsable des évènements.
 2. Le X Server détermine quelle fenêtre est impacté par l'évènement et l'envoie au X client concerné.
@@ -232,8 +233,8 @@ Wayland a également le potentiel d'être plus rapide, en réduisant la quantit�
 
 ## Sources
 
-[wayland-vs-xorg](https://www.secjuice.com/wayland-vs-xorg/)
-[Xorg/wiki](https://www.x.org/wiki/)
-[Xorg server](https://www.wikiwand.com/en/X.Org_Server)
-[X Window System](https://www.wikiwand.com/en/X_Window_System)
-[Wayland](https://wayland.freedesktop.org/)
+- [wayland-vs-xorg](https://www.secjuice.com/wayland-vs-xorg/)
+- [Xorg/wiki](https://www.x.org/wiki/)
+- [Xorg server](https://www.wikiwand.com/en/X.Org_Server)
+- [X Window System](https://www.wikiwand.com/en/X_Window_System)
+- [Wayland](https://wayland.freedesktop.org/)
