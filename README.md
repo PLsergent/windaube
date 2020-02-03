@@ -1,5 +1,32 @@
 # X11 vs Wayland
 
+- [X11 vs Wayland](#x11-vs-wayland)
+  * [Introduction](#introduction)
+  * [X Window System](#x-window-system)
+    + [Introduction](#introduction-1)
+      - [Terminologies](#terminologies)
+    + [Origine et objectifs](#origine-et-objectifs)
+    + [Fonctionnement](#fonctionnement)
+      - [Description d'un workflow classique](#description-d-un-workflow-classique)
+    + [X Server - Xorg](#x-server---xorg)
+      - [Device Independent X (DIX)](#device-independent-x--dix-)
+      - [Device Dependent X (DDX)](#device-dependent-x--ddx-)
+    + [Limites](#limites)
+      - [Interface utilisateur](#interface-utilisateur)
+      - [Client-serveur](#client-serveur)
+  * [Wayland](#wayland)
+    + [Introduction](#introduction-2)
+    + [Objectifs](#objectifs)
+    + [Fonctionnement](#fonctionnement-1)
+    + [Rendu direct](#rendu-direct)
+    + [Programmation](#programmation)
+  * [Comparaison](#comparaison)
+  * [Sources](#sources)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+---
+
 |          X11           |          Wayland          |
 | :--------------------------: | :---------------------: |
 | ![x11](./assets/X11.png) | ![wayland](./assets/wayland.png) |
@@ -30,8 +57,8 @@ Nous allons donc étudier le protocole le plus utilisé de nos jours **X**, puis
 
 - **X ou X Window System** : désigne le protocole ou framework de base qui permet de mettre en place une GUI.
 - **X11** : 11ème version de X.
-- **Xorg** : implémentation du serveur d'affichage (X server) utilisé dans le framework X.
-- **Xlib & Xcb** : librairies côté client écrites en C permettant d'intéragir facilement avec le X server.
+- **Xorg** : implémentation du serveur d'affichage (X Server) utilisé dans le framework X.
+- **Xlib & Xcb** : librairies côté client écrites en C permettant d'intéragir facilement avec le X Server.
 
 ### Origine et objectifs
 
@@ -58,7 +85,7 @@ X utilise un model *client-serveur*. Le serveur (X Server) communique avec diff�
 
 Voici donc les 4 parties d'une architecture X :
 - **KMS** (Kernel Mode Setting: responsable de l'affichage), **evdev** (interface/driver des évènements sur Linux), **Kernel** (noyau Linux)
-- **X server**
+- **X Server**
 - **X client**
 - **Compositor**
 
@@ -69,12 +96,12 @@ Voici donc les 4 parties d'une architecture X :
 
 #### Description d'un workflow classique
 
-1. Le Kernel reçoit un *input* et l'envoie au X server en utilisant le driver *evdev* responsable des évènements.
-2. Le X server détermine quelle fenêtre est impacté par l'évènement et l'envoie au X client concerné.
+1. Le Kernel reçoit un *input* et l'envoie au X Server en utilisant le driver *evdev* responsable des évènements.
+2. Le X Server détermine quelle fenêtre est impacté par l'évènement et l'envoie au X client concerné.
 3. Le X client traite l'évènement et choisi quelle(s) action(s) doivent être effectuées. Par exemple une checkbox a été cliqué et on doit donc changer l'affichage de cette dernière. Suite à cela le client envoie une requête d'affichage au serveur.
-4. Quand le X server reçoit cette requête, il l'a redirige vers le driver spécifique afin de réaliser les changements voulu en s'appuyant sur le hardware. Le serveur va aussi calculer la zone de délimitation du rendu et envoie ces informations au *compositor*.
+4. Quand le X Server reçoit cette requête, il l'a redirige vers le driver spécifique afin de réaliser les changements voulu en s'appuyant sur le hardware. Le serveur va aussi calculer la zone de délimitation du rendu et envoie ces informations au *compositor*.
 5. Les informations reçu par le *compositor* lui indique qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le composeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
-6. Le X server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
+6. Le X Server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
 
 ---
 
@@ -84,9 +111,9 @@ Le fonctionnement du protocol reste global en ne faisant aucune spécification s
 
 ![wm awesome](./assets/awesome.png)
 
-### X server - Xorg
+### X Server - Xorg
 
-X server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéraction entre l'utilisateur, le client et le composeur.
+X Server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéraction entre l'utilisateur, le client et le composeur.
 
 L'implémentation actuelle de ce serveur, est nommée **Xorg**.
 Elle a été écrite en C, avec une licence FOSS (Free and Open Source Software) et est maintenue par la [Xorg Foundation](https://www.wikiwand.com/en/X.Org_Foundation).
@@ -122,9 +149,9 @@ Au final chaque environnement de bureau possède ses propres règles.
 
 #### Client-serveur
 
-Comme expliqué dans la partie **Device Dependent X (DDX)**, avec l'example du driver de rendu graphique 2D, auparavant beaucoup de modules et donc de traitements étaient effectués dans le X server (Xorg). Cependant de nos jours la plupart de ces modules sont implémentés directement dans le noyau Linux ou dans des librairies présentes par défaut.
+Comme expliqué dans la partie **Device Dependent X (DDX)**, avec l'example du driver de rendu graphique 2D, auparavant beaucoup de modules et donc de traitements étaient effectués dans le X Server (Xorg). Cependant de nos jours la plupart de ces modules sont implémentés directement dans le noyau Linux ou dans des librairies présentes par défaut.
 
-Le X server ne fait donc pas grand chose. Il représente une étape supplémentaire, qui permet de faire passer les requêtes aux bons composants. On note que cette étape supplémentaire augmente la compléxité du framework X.
+Le X Server ne fait donc pas grand chose. Il représente une étape supplémentaire, qui permet de faire passer les requêtes aux bons composants. On note que cette étape supplémentaire augmente la compléxité du framework X.
 
 De plus, c'est le *compositor* qui prend les décisions finales quant à l'affichage. On se pose donc la question du véritable intérêt du serveur (tout du moins dans cette organisation), et de l'intérêt de la séparation du serveur et du composeur, qui prend une grande partie des décisions.
 
