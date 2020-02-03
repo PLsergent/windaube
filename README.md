@@ -76,6 +76,14 @@ Voici donc les 4 parties d'une architecture X :
 5. Les informations reçu par le *compositor* lui indique qu'un changement a été réalisé sur la fenêtre et qu'il doit donc changer la partie visible de cette fenêtre. Le composeur est responsable de l'affichage de l'ensemble de l'écran, en fonction d'un scénario prédéfini et des informations reçues, envoyé par les clients. Il doit quand même repasser par le serveur pour réaliser l'affichage.
 6. Le X server reçoit les informations du *compositor* et met à jour le tampon. Il doit aussi tenir compte des fenêtres qui se chevauchent pour savoir s'il doit ou non retourner les changements. Les informations sont transmises au KMS qui est un sous module du DRM (Direct Rendering Manager), en charge de l'affichage (en lien avec les cartes graphiques). Le KMS gère alors la pipeline d'affichage.
 
+---
+
+Le fonctionnement du protocol reste global en ne faisant aucune spécification sur le design que les interfaces peuvent prendre. Le design peut être géré à plusieurs niveaux :
+- ***Desktop environments*** (environnement de bureau) : désigne l'aspect global, le design, du bureau. Les plus connus sont **GNOME**, **KDE**, **Xfce**.
+- ***Window managers*** (gestionnaire de fenêtres) : les environnements de bureaux possèdent en principe un gestionnaire de fenêtre par défaut. **KWin** pour KDE, **Metacity** pour GNOME 2. Mais il en existe d'autres plus légers et indépendants comme **i3** ou **awesome** (ci-dessous).
+
+![wm awesome](./assets/awesome.png)
+
 ### X server - Xorg
 
 X server est donc la pierre angulaire de ce framework X11. C'est lui qui est au milieu des intéraction entre l'utilisateur, le client et le composeur.
@@ -99,9 +107,26 @@ Cette partie est dépendante car elle intéragie avec le hardware. Le hardware d
 
 Un driver qui nous intéresse est le ***2D graphics driver***.
 
-Pour des raisons historiques Xorg possède toujours un driver pour les rendus graphique en 2D. En effet auparavant, c'est Xorg qui s'en occupait. Cette fonctionnalité a été déplacé dans le DRM, avec la nouvelle approche : le KMS (cf étape 6 du workflow), présent dans le noyau Linux.
+Pour des raisons historiques Xorg possède toujours un driver pour les rendus graphique en 2D. En effet auparavant, c'est Xorg qui s'en occupait. Cette fonctionnalité a été déplacé dans le DRM, avec la nouvelle approche : le KMS (cf. étape 6 du workflow), présent dans le noyau Linux.
 
 ### Limites
+
+X11 et Xorg sont présents et utilisés par défaut sur quasiment toutes les distributions Linux.
+Malgré tout X possèdent plusieurs points faibles voir même des problèmes qui poussent les développeurs à se demander si X est le système de fenêtre optimal.
+
+#### Interface utilisateur
+
+Du fait qu'il n'existe aucun guide sur comment développer une interface utilisateur au sein de X (cf. Description d'un workflow classique), il en résulte une vaste variété d'interfaces différentes. Cela a créé des problèmes de communications entre les clients. Il existe une convention appelée [ICCCM](https://www.wikiwand.com/en/Inter-Client_Communication_Conventions_Manual) (Inter-Client Communication Conventions Manual) qui spécifie les modalités pour permettre l'interopérabilité des clients, mais est difficile à mettre en place.
+
+Au final chaque environnement de bureau possède ses propres règles.
+
+#### Client-serveur
+
+Comme expliqué dans la partie **Device Dependent X (DDX)**, avec l'example du driver de rendu graphique 2D, auparavant beaucoup de modules et donc de traitements étaient effectués dans le X server (Xorg). Cependant de nos jours la plupart de ces modules sont implémentés directement dans le noyau Linux ou dans des librairies présentes par défaut.
+
+Le X server ne fait donc pas grand chose. Il représente une étape supplémentaire, qui permet de faire passer les requêtes aux bons composants. On note que cette étape supplémentaire augmente la compléxité du framework X.
+
+De plus, c'est le *compositor* qui prend les décisions finales quant à l'affichage. On se pose donc la question du véritable intérêt du serveur (tout du moins dans cette organisation), et de l'intérêt de la séparation du serveur et du composeur, qui prend une grande partie des décisions.
 
 ## Wayland
 
